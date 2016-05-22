@@ -1,4 +1,3 @@
-// 50 highest scoreed IMDB movies
 var movies = [
     'The Shawshank Redemption', 
     'The Godfather', 
@@ -85,7 +84,6 @@ var plot = "";
 
 // SMHI API  
 var weatherData = "http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/" + lat + "/lon/" + lon + "/data.json"; 
-var randMovie = movies[Math.floor(Math.random() * movies.length)];
 var randOutsideActivitie = outsideActivities[Math.floor(Math.random() * outsideActivities.length)];
   
 $.get(weatherData, function(data, textStatus, jqXHR) {
@@ -117,18 +115,12 @@ function newMovie(){
   var randMovie = movies[Math.floor(Math.random() * movies.length)];
   // Gör en request med jQuery mot OMDb's API    
   var APIKey = 88714077;
-  //var movieURL = "http://www.omdbapi.com/?t="+ randMovie +"&y=&plot=full&r=json";
+  var movieURL = "http://www.omdbapi.com/?t="+ randMovie +"&y=&plot=full&r=json";
   //var movieURLrating = "http://www.omdbapi.com/?i="+ ranbdomImdbId +"&y=&plot=full&r=json";
     
   $.get(movieURL, function(data, textStatus, jqXHR) {
       
     var posterURL = "http://img.omdbapi.com/?i="+ data.imdbID +"&apikey=" + APIKey + "&h=500"; 
-
-    var title = data.Title;
-    var year = data.Year;
-    var genre = data.Genre;
-    var imdbRating = data.imdbRating;
-    var plot = data.plot;
       
    // set title and release year  
     $('#movie-titel-and-year').text(title + " (" + year + ")");
