@@ -25,7 +25,6 @@ var movies = [
     'The Silence of the Lambs',
     'Its a Wonderful Life',
     'The Usual Suspects',
-    'Life Is Beautiful',
     'Léon: The Professional',
     'Once Upon a Time in the West',
     'Spirited Away',
@@ -34,7 +33,6 @@ var movies = [
     'Interstellar',
     'Casablanca',
     'Psycho',
-    'City Lights',
     'Raiders of the Lost Ark',
     'The Intouchables',
     'Rear Window',
@@ -64,11 +62,29 @@ var outsideActivities = [
     'Take ride with your bike.',
     'Fly a kite.',
     'Look at the clouds.'
-];    
+];   
+
+// Stockholm lon & lat
+lat = 59.33;
+lon = 18.06;
+
+
+//generate random IMDB Id
+ranbdomImdbId = "tt";
+for (i = 0; i < 7; i++) { 
+    ranbdomImdbId = ranbdomImdbId + Math.floor((Math.random() * 10) + 1); 
+}
+
+// movie var
+var title = "";
+var year = "";
+var genre = "";
+var imdbRating = "";
+var plot = "";
 
 
 // SMHI API  
-var weatherData = "http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/58.59/lon/16.18/data.json"; 
+var weatherData = "http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/" + lat + "/lon/" + lon + "/data.json"; 
 var randMovie = movies[Math.floor(Math.random() * movies.length)];
 var randOutsideActivitie = outsideActivities[Math.floor(Math.random() * outsideActivities.length)];
   
@@ -83,56 +99,61 @@ $.get(weatherData, function(data, textStatus, jqXHR) {
       $('#movie-poster').attr("src", "http://www.publicdomainpictures.net/pictures/50000/nahled/smiling-sun-face-in-sunglasses.jpg");
       $('#button-new-movie').text("Watch a movie anyway!");
 
-  } else {          
-      var APIKey = 88714077; // for poster
-      var movieURL = "http://www.omdbapi.com/?t="+ randMovie +"&y=&plot=full&r=json";
-
-      $.get(movieURL, function(data, textStatus, jqXHR) {
-          var posterURL = "http://img.omdbapi.com/?i="+ data.imdbID +"&apikey=" + APIKey + "&h=500"; 
-          
-          // set title  
-          $('#weather-status').text("It´s cold outside, stay in and watch a movie!");
-          
-          // set title and release year  
-          $('#movie-titel-and-year').text(data.Title + " (" + data.Year + ")");
-          
-          // set genre and rating 
-          $('#movie-genre-and-rating').text("Genre: " + data.Genre + " || " + "IMDB rating: " +  data.imdbRating);
-          
-          // set plot
-          $('#movie-plot').text(data.Plot);
-          
-          // set poster
-          $('#movie-poster').attr("src", posterURL);
-
-       });
+  } else {
+      while(title == "undefined" || title == "") {
+          newMovie();
+      }
     }      
 });
 
-
 // new movie, OMDb API
 $('#button-new-movie').click(function() {
+  newMovie();
+});
+
+
+
+function newMovie(){
   var randMovie = movies[Math.floor(Math.random() * movies.length)];
   // Gör en request med jQuery mot OMDb's API    
   var APIKey = 88714077;
-  var movieURL = "http://www.omdbapi.com/?t="+ randMovie +"&y=&plot=full&r=json";
-  
-
+  //var movieURL = "http://www.omdbapi.com/?t="+ randMovie +"&y=&plot=full&r=json";
+  //var movieURLrating = "http://www.omdbapi.com/?i="+ ranbdomImdbId +"&y=&plot=full&r=json";
+    
   $.get(movieURL, function(data, textStatus, jqXHR) {
       
-      var posterURL = "http://img.omdbapi.com/?i="+ data.imdbID +"&apikey=" + APIKey + "&h=500"; 
+    var posterURL = "http://img.omdbapi.com/?i="+ data.imdbID +"&apikey=" + APIKey + "&h=500"; 
 
+    var title = data.Title;
+    var year = data.Year;
+    var genre = data.Genre;
+    var imdbRating = data.imdbRating;
+    var plot = data.plot;
+      
    // set title and release year  
-    $('#movie-titel-and-year').text(data.Title + " (" + data.Year + ")");
+    $('#movie-titel-and-year').text(title + " (" + year + ")");
 
     // set genre and rating 
-    $('#movie-genre-and-rating').text("Genre: " + data.Genre + " || " + "IMDB rating: " +  data.imdbRating);
+    $('#movie-genre-and-rating').text("Genre: " + genre + " || " + "IMDB rating: " + imdbRating);
 
     // set plot
-    $('#movie-plot').text(data.Plot);
+    $('#movie-plot').text(plot);
 
     // set poster
     $('#movie-poster').attr("src", posterURL);
       
   });
-});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
