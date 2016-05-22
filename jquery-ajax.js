@@ -2,7 +2,7 @@ var movies = [
     'The Shawshank Redemption', 
     'The Godfather', 
     'The Godfather: Part II', 
-    'The Dark Night',
+    'TThe Dark Knight',
     'Schindlers List',
     '12 Angry Men',
     'Pulp Fiction',
