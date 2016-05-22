@@ -74,8 +74,10 @@ for (i = 0; i < 7; i++) {
     ranbdomImdbId = ranbdomImdbId + Math.floor((Math.random() * 10) + 1); 
 }
 
+
 // SMHI API  
 var weatherData = "http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/" + lat + "/lon/" + lon + "/data.json"; 
+var randMovie = movies[Math.floor(Math.random() * movies.length)];
 var randOutsideActivitie = outsideActivities[Math.floor(Math.random() * outsideActivities.length)];
   
 $.get(weatherData, function(data, textStatus, jqXHR) {
@@ -91,6 +93,7 @@ $.get(weatherData, function(data, textStatus, jqXHR) {
 
   } else {
       newMovie();
+    }      
 });
 
 // new movie, OMDb API
@@ -110,6 +113,12 @@ function newMovie(){
   $.get(movieURL, function(data, textStatus, jqXHR) {
       
     var posterURL = "http://img.omdbapi.com/?i="+ data.imdbID +"&apikey=" + APIKey + "&h=500"; 
+
+    var title = data.Title;
+    var year = data.Year;
+    var genre = data.Genre;
+    var imdbRating = data.imdbRating;
+    var plot = data.plot;
       
    // set title and release year  
     $('#movie-titel-and-year').text(title + " (" + year + ")");
@@ -125,16 +134,3 @@ function newMovie(){
       
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
