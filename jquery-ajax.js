@@ -74,14 +74,6 @@ for (i = 0; i < 7; i++) {
     ranbdomImdbId = ranbdomImdbId + Math.floor((Math.random() * 10) + 1); 
 }
 
-// movie var
-var title = "";
-var year = "";
-var genre = "";
-var imdbRating = "";
-var plot = "";
-
-
 // SMHI API  
 var weatherData = "http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/" + lat + "/lon/" + lon + "/data.json"; 
 var randOutsideActivitie = outsideActivities[Math.floor(Math.random() * outsideActivities.length)];
@@ -98,10 +90,7 @@ $.get(weatherData, function(data, textStatus, jqXHR) {
       $('#button-new-movie').text("Watch a movie anyway!");
 
   } else {
-      while(title == "undefined" || title == "") {
-          newMovie();
-      }
-    }      
+      newMovie();
 });
 
 // new movie, OMDb API
