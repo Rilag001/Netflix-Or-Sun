@@ -1,191 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <title>Netflix of Sun?</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-    <link rel="stylesheet" href="app.min.css">
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
-    <style>
-        .app-topbar {
-            background: green;
-        }
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Netflix or Sun?</title>
         
-        #movie-poster {
-            width: 100%;
-        }
-    </style>
-  </head>
-
-  <body>
-    <div class="app-page" data-page="home">
-      <div class="app-topbar">
-        <div class="app-title">Netflix of Sun?</div>
-      </div>
-      <div class="app-content">
-        <div class="app-section">
-          <img id ="movie-poster">
-            <h1 id="weather-status"></h1>
-            <h1 id="movie-titel-and-year"></h1>
-            <p id="movie-genre-and-rating"></p>
-            <p id="movie-plot"></p>
-        </div>
-        <div class="app-section">
-          <div class="app-button" id="button-new-movie">New movie</div>
-        </div>
-      </div>
-    </div>
-
-
-    
-    <script src="app.min.js"></script>
-    <script>
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
         
-    var movies = [
-        'The Shawshank Redemption', 
-        'The Godfather', 
-        'The Godfather: Part II', 
-        'The Dark Night',
-        'Schindlers List',
-        '12 Angry Men',
-        'Pulp Fiction',
-        'The Lord of the Rings: The Return of the King',
-        'The Good, the Bad and the Ugly',
-        'Fight Club',
-        'The Lord of the Rings: The Fellowship of the Ring',
-        'Star Wars: Episode V - The Empire Strikes Back',
-        'Forrest Gump',
-        'Inception',
-        'The Lord of the Rings: The Two Towers',
-        'One Flew Over the Cuckoos Nest',
-        'Goodfellas',
-        'The Matrix',
-        'Seven Samurai',
-        'Star Wars: Episode IV - A New Hope',
-        'City of God',
-        'Se7en',
-        'The Silence of the Lambs',
-        'Its a Wonderful Life',
-        'The Usual Suspects',
-        'Léon: The Professional',
-        'Once Upon a Time in the West',
-        'Spirited Away',
-        'Saving Private Ryan',
-        'American History X',
-        'Interstellar',
-        'Casablanca',
-        'Psycho',
-        'Raiders of the Lost Ark',
-        'The Intouchables',
-        'Rear Window',
-        'Modern Times',
-        'The Green Mile ',
-        'Terminator 2: Judgment Day',
-        'The Pianist',
-        'The Departed ',
-        'Back to the Future ',
-        'Whiplash',
-        'Gladiator',
-        'Memento',
-        'Apocalypse Now',
-        'The Prestige',
-        'The Lion King'
-    ];    
-
-    // what you can do outside...
-    var outsideActivities = [
-        'Go and play cricket.', 
-        'Hang in the park with firends.', 
-        'Drink vine in a hammock.', 
-        'Go for a swim.',
-        'Do a cartwheel. (If you can...)',
-        'Take a stroll.',
-        'Pool-party!',
-        'Take ride with your bike.',
-        'Fly a kite.',
-        'Look at the clouds.'
-    ];   
-
-    // Stockholm lon & lat
-    lat = 59.33;
-    lon = 18.06;
-
-
-    //generate random IMDB Id
-    ranbdomImdbId = "tt";
-    for (i = 0; i < 7; i++) { 
-        ranbdomImdbId = ranbdomImdbId + Math.floor((Math.random() * 10) + 1); 
-    }
-    
-    App.controller('home', function (page) {
-    
-    // SMHI API  
-    var weatherData = "http://opendata-download-metfcst.smhi.se/api/category/pmp1.5g/version/1/geopoint/lat/" + lat + "/lon/" + lon + "/data.json"; 
-    var randMovie = movies[Math.floor(Math.random() * movies.length)];
-    var randOutsideActivitie = outsideActivities[Math.floor(Math.random() * outsideActivities.length)];
-  
-    $.get(weatherData, function(data, textStatus, jqXHR) {
-        // temp and cludyness 
-        var temp = data.timeseries[0].t;  
-        var cloudyness = data.timeseries[0].tcc;  
-
-      // if temp is over 15 celcius abd cloudyness = or < then 6/8, tell user to go outside
-      if(temp > 15 && cloudyness <= 6){
-          $('#weather-status').text("It´s warm and sunny outside! " + randOutsideActivitie);
-          $('#movie-poster').attr("src", "http://www.publicdomainpictures.net/pictures/50000/nahled/smiling-sun-face-in-sunglasses.jpg");
-          $('#button-new-movie').text("Watch a movie anyway!");
-
-      } else {
-          $('#weather-status').text("Its cold outside, stay in and watcha  movie!");
-          newMovie();
-      }      
-    });
-         
-                                               
-        // new movie, OMDb API
-        $(page).find('#button-new-movie').click(function() {
-          newMovie();
-        });
-
-      });
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>        
+        <img id ="movie-poster">
+        <h1 id="weather-status"></h1>
+        <h1 id="movie-titel-and-year"></h1>
+        <p id="movie-genre-and-rating"></p>
+        <p id="movie-plot"></p>
+        <button id="button-new-movie">New movie</button>
         
-        function newMovie(){
-      var randMovie = movies[Math.floor(Math.random() * movies.length)];
-      // Gör en request med jQuery mot OMDb's API    
-      var APIKey = 88714077;
-      var movieURL = "http://www.omdbapi.com/?t="+ randMovie +"&y=&plot=full&r=json";
-      //var movieURLrating = "http://www.omdbapi.com/?i="+ ranbdomImdbId +"&y=&plot=full&r=json";
-
-      $.get(movieURL, function(data, textStatus, jqXHR) {
-
-        var posterURL = "http://img.omdbapi.com/?i="+ data.imdbID +"&apikey=" + APIKey; 
-
-        var title = data.Title;
-        var year = data.Year;
-        var genre = data.Genre;
-        var imdbRating = data.imdbRating;
-        var plot = data.Plot;
-
-       // set title and release year  
-        $('#movie-titel-and-year').text(title + " (" + year + ")");
-
-        // set genre and rating 
-        $('#movie-genre-and-rating').text("Genre: " + genre + " || " + "IMDB rating: " + imdbRating);
-
-        // set plot
-        $('#movie-plot').text(plot);
-
-        // set poster
-        $('#movie-poster').attr("src", posterURL);
-
-      });
-    }
-
-
-      try {
-        App.restore();
-      } catch (err) {
-        App.load('home');
-      }
-    </script>
-  </body>
+        <script src="jquery-ajax.js"></script>
+    </body>
 </html>
