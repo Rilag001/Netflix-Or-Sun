@@ -1,24 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Netflix or Sun?</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Netflix of Sun?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="app.min.css">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    <style>
+        .app-content{
+            background: #4CAF50;
+        }
+        .app-topbar {
+            background: #388E3C;
+        }
         
-        <!-- jquery -->
-        <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
-        
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body>        
-        <img id ="movie-poster">
-        <h1 id="weather-status"></h1>
-        <h1 id="movie-titel-and-year"></h1>
-        <p id="movie-genre-and-rating"></p>
-        <p id="movie-plot"></p>
-        <button id="button-new-movie">New movie</button>
-        
-        <script src="jquery-ajax.js"></script>
-    </body>
+        #movie-poster {
+            width: 100%;
+        }
+    </style>
+  </head>
+
+  <body>
+    <div class="app-page" data-page="home">
+      <div class="app-topbar">
+        <div class="app-title">Netflix of Sun?</div>
+      </div>
+      <div class="app-content">
+        <div class="app-section">
+          <img id ="movie-poster" onerror="imgError(this);">
+            <h2 id="weather-status"></h2>
+            <h1 id="movie-titel-and-year"></h1>
+            <p id="movie-genre-and-rating"></p>
+            <p id="movie-plot"></p>
+        </div>
+        <div class="app-section">
+          <div class="app-button" id="button-new-movie">New movie</div>
+        </div>
+      </div>
+    </div>
+    <script src="app.min.js"></script>
+    <script src="simplelist.js"></script>
+  </body>
 </html>
