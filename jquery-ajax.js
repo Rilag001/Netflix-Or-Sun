@@ -77,6 +77,7 @@ function newMovie() {
         var imdbRating = data.imdbRating;
         var imdbPlot = data.Plot;
         var imdbType = data.Type;
+        var imdbLink = "http://www.imdb.com/title/"+data.imdbID
 
         //if varimdb.. undefined reset text and newMovie()  
         if (imdbTitle == "undefined" || imdbYear == "undefined" || imdbGenre == "undefined" || imdbRating == "undefined" || imdbPlot == "undefined" || imdbType != "movie") {
@@ -94,6 +95,9 @@ function newMovie() {
 
             // set poster
             $('#movie-poster').attr("src", imdbPosterURL);
+            
+            // set link
+            $('#movie-link').attr("href", imdbLink).text("IMDb link");
 
         }
     });
@@ -101,13 +105,16 @@ function newMovie() {
 
 function resetText() {
     // set title and release year  
-    $('#movie-titel-and-year').text("...");
+    $('#movie-titel-and-year').text("");
 
     // set genre and rating 
-    $('#movie-genre-and-rating').text("...");
+    $('#movie-genre-and-rating').text("");
 
     // set plot
-    $('#movie-plot').text("...");
+    $('#movie-plot').text("");
+    
+    // set link
+    $('#movie-link').text("");
 }
 
 function imgError(image) {
