@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>Netflix of Sun?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
     <link rel="stylesheet" href="app.min.css">
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     <style>
-        .app-content{
+        .app-content {
             background: #4CAF50;
         }
+        
         .app-topbar {
             background: #388E3C;
         }
@@ -18,27 +20,28 @@
             width: 100%;
         }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="app-page" data-page="home">
-      <div class="app-topbar">
-        <div class="app-title">Netflix of Sun?</div>
-      </div>
-      <div class="app-content">
-        <div class="app-section">
-          <img id ="movie-poster" onerror="imgError(this);">
-            <h2 id="weather-status"></h2>
-            <h1 id="movie-titel-and-year"></h1>
-            <p id="movie-genre-and-rating"></p>
-            <p id="movie-plot"></p>
+        <div class="app-topbar">
+            <div class="app-title">Netflix of Sun?</div>
         </div>
-        <div class="app-section">
-          <div class="app-button" id="button-new-movie">New movie</div>
+        <div class="app-content">
+            <div class="app-section">
+                <img id="movie-poster" onerror="imgError(this);">
+                <h2 id="weather-status"></h2>
+                <h1 id="movie-titel-and-year"></h1>
+                <p id="movie-genre-and-rating"></p>
+                <p id="movie-plot"></p>
+            </div>
+            <div class="app-section">
+                <div class="app-button" id="button-new-movie">New movie</div>
+            </div>
         </div>
-      </div>
     </div>
     <script src="app.min.js"></script>
-    <script src="jquery-ajax.js"></script>
-  </body>
+    <script src="simplelist.js"></script>
+</body>
+
 </html>
